@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 import { User, Circle, Mail, Calendar, Award, Edit2, Save, X, Crown, Shield } from 'lucide-react';
 
 const ProfilePage: React.FC = () => {
-  const { user, refreshProfile } = useAuth();
+  const { user, refreshProfile, isSuperAdmin, isAdmin } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -58,7 +58,7 @@ const ProfilePage: React.FC = () => {
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading profile...</p>
+          <p className="text-gray-600 dark:text-gray-400">Loading profile...</p>
         </div>
       </div>
     );
@@ -67,15 +67,15 @@ const ProfilePage: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
       {/* Header */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="w-20 h-20 bg-gradient-to-br from-blue-400 to-purple-600 rounded-full flex items-center justify-center">
               <User className="w-10 h-10 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">{user.name}</h1>
-              <p className="text-gray-600">{user.email}</p>
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{user.name}</h1>
+              <p className="text-gray-600 dark:text-gray-400">{user.email}</p>
               <div className="flex items-center space-x-2 mt-2">
                 {user.roles.map((role) => (
                   <span
@@ -123,12 +123,12 @@ const ProfilePage: React.FC = () => {
       </div>
 
       {/* Profile Information */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-6">Profile Information</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Profile Information</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Full Name
             </label>
             {isEditing ? (
@@ -142,13 +142,13 @@ const ProfilePage: React.FC = () => {
             ) : (
               <div className="flex items-center space-x-2">
                 <User className="w-4 h-4 text-gray-400" />
-                <span className="text-gray-900">{user.name}</span>
+                <span className="text-gray-900 dark:text-white">{user.name}</span>
               </div>
             )}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Email Address
             </label>
             {isEditing ? (
@@ -162,13 +162,13 @@ const ProfilePage: React.FC = () => {
             ) : (
               <div className="flex items-center space-x-2">
                 <Mail className="w-4 h-4 text-gray-400" />
-                <span className="text-gray-900">{user.email}</span>
+                <span className="text-gray-900 dark:text-white">{user.email}</span>
               </div>
             )}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Age
             </label>
             {isEditing ? (
@@ -184,20 +184,20 @@ const ProfilePage: React.FC = () => {
             ) : (
               <div className="flex items-center space-x-2">
                 <Calendar className="w-4 h-4 text-gray-400" />
-                <span className="text-gray-900">{user.age} years old</span>
+                <span className="text-gray-900 dark:text-white">{user.age} years old</span>
               </div>
             )}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Account Type
             </label>
             <div className="flex items-center space-x-2">
               <Award className="w-4 h-4 text-gray-400" />
-              <span className="text-gray-900">
-                {user.roles.includes('super_admin') ? 'Super Administrator' : 
-                 user.roles.includes('admin') ? 'Administrator' : 'Regular User'}
+              <span className="text-gray-900 dark:text-white">
+                {isSuperAdmin() ? 'Super Administrator' : 
+                 isAdmin() ? 'Administrator' : 'Regular User'}
               </span>
             </div>
           </div>
@@ -224,36 +224,36 @@ const ProfilePage: React.FC = () => {
       </div>
 
       {/* Account Stats */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-6">Account Statistics</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Account Statistics</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="text-center">
-            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+            <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center mx-auto mb-3">
               <Calendar className="w-8 h-8 text-blue-600" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-900">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
               {user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}
             </h3>
-            <p className="text-gray-600">Member Since</p>
+            <p className="text-gray-600 dark:text-gray-400">Member Since</p>
           </div>
           
           <div className="text-center">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+            <div className="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-3">
               <Award className="w-8 h-8 text-green-600" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-900">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
               {user.roles.length}
             </h3>
-            <p className="text-gray-600">Active Role{user.roles.length > 1 ? 's' : ''}</p>
+            <p className="text-gray-600 dark:text-gray-400">Active Role{user.roles.length > 1 ? 's' : ''}</p>
           </div>
           
           <div className="text-center">
-            <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+            <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/20 rounded-full flex items-center justify-center mx-auto mb-3">
               <Circle className="w-8 h-8 text-purple-600" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-900">Active</h3>
-            <p className="text-gray-600">Account Status</p>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Active</h3>
+            <p className="text-gray-600 dark:text-gray-400">Account Status</p>
           </div>
         </div>
       </div>

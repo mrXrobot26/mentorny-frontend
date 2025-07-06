@@ -9,11 +9,16 @@ interface AuthContextType {
   isLoading: boolean;
   login: (credentials: LoginCredentials) => Promise<boolean>;
   register: (credentials: RegisterCredentials) => Promise<boolean>;
-  logout: () => void;
+  logout: () => Promise<void>;
   refreshProfile: () => Promise<void>;
   hasRole: (role: Role) => boolean;
   isAdmin: () => boolean;
   isSuperAdmin: () => boolean;
+  updateUserRoles: (userId: number, roles: Role[]) => Promise<User>;
+  getAllUsers: () => Promise<User[]>;
+  getUserById: (id: number) => Promise<User>;
+  updateUser: (id: number, userData: Partial<User>) => Promise<User>;
+  deleteUser: (id: number) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -61,8 +66,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setIsLoading(true);
       const response: AuthResponse = await apiService.login(credentials);
       
-      // Store token and user data
+      // Store tokens and user data
       apiService.setAuthToken(response.access_token);
+      apiService.setRefreshToken(response.refresh_token);
       setUser(response.user);
       
       // Store user data in localStorage for persistence
@@ -84,8 +90,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setIsLoading(true);
       const response: AuthResponse = await apiService.register(credentials);
       
-      // Store token and user data
+      // Store tokens and user data
       apiService.setAuthToken(response.access_token);
+      apiService.setRefreshToken(response.refresh_token);
       setUser(response.user);
       
       // Store user data in localStorage for persistence
@@ -102,10 +109,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const logout = () => {
-    apiService.clearAuthToken();
-    setUser(null);
-    toast.success('Logged out successfully');
+  const logout = async () => {
+    try {
+      await apiService.logout();
+      setUser(null);
+      toast.success('Logged out successfully');
+    } catch (error: any) {
+      console.error('Logout error:', error);
+      // Even if logout fails on server, clear local state
+      setUser(null);
+      toast.success('Logged out successfully');
+    }
   };
 
   const refreshProfile = async (): Promise<void> => {
@@ -132,6 +146,63 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     return hasRole(Role.SUPER_ADMIN);
   };
 
+  // Role management methods
+  const updateUserRoles = async (userId: number, roles: Role[]): Promise<User> => {
+    try {
+      const updatedUser = await apiService.updateUserRoles(userId, roles);
+      toast.success('User roles updated successfully');
+      return updatedUser;
+    } catch (error: any) {
+      console.error('Update user roles error:', error);
+      toast.error(error.message || 'Failed to update user roles');
+      throw error;
+    }
+  };
+
+  // User management methods
+  const getAllUsers = async (): Promise<User[]> => {
+    try {
+      return await apiService.getAllUsers();
+    } catch (error: any) {
+      console.error('Get all users error:', error);
+      toast.error(error.message || 'Failed to fetch users');
+      throw error;
+    }
+  };
+
+  const getUserById = async (id: number): Promise<User> => {
+    try {
+      return await apiService.getUserById(id);
+    } catch (error: any) {
+      console.error('Get user by ID error:', error);
+      toast.error(error.message || 'Failed to fetch user');
+      throw error;
+    }
+  };
+
+  const updateUser = async (id: number, userData: Partial<User>): Promise<User> => {
+    try {
+      const updatedUser = await apiService.updateUser(id, userData);
+      toast.success('User updated successfully');
+      return updatedUser;
+    } catch (error: any) {
+      console.error('Update user error:', error);
+      toast.error(error.message || 'Failed to update user');
+      throw error;
+    }
+  };
+
+  const deleteUser = async (id: number): Promise<void> => {
+    try {
+      await apiService.deleteUser(id);
+      toast.success('User deleted successfully');
+    } catch (error: any) {
+      console.error('Delete user error:', error);
+      toast.error(error.message || 'Failed to delete user');
+      throw error;
+    }
+  };
+
   const value: AuthContextType = {
     user,
     isAuthenticated: !!user,
@@ -143,6 +214,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     hasRole,
     isAdmin,
     isSuperAdmin,
+    updateUserRoles,
+    getAllUsers,
+    getUserById,
+    updateUser,
+    deleteUser,
   };
 
   return (

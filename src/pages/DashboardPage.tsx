@@ -141,8 +141,8 @@ const DashboardPage: React.FC = () => {
                 <stat.icon className="w-6 h-6" />
               </div>
               <div className="text-right">
-                <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
-                <div className="text-sm text-gray-500">{stat.label}</div>
+                <div className="text-2xl font-bold text-gray-900 dark:text-white">{stat.value}</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">{stat.label}</div>
               </div>
             </div>
             <div className="text-sm text-green-600 font-medium">{stat.change}</div>
@@ -170,7 +170,7 @@ const DashboardPage: React.FC = () => {
         {/* Current Progress */}
         <div className="card">
           <div className="card-header">
-            <h2 className="text-lg font-semibold flex items-center gap-2">
+            <h2 className="text-lg font-semibold flex items-center gap-2 text-gray-900 dark:text-white">
               <Target className="w-5 h-5 text-primary-600" />
               Current Learning Path
             </h2>
@@ -180,10 +180,10 @@ const DashboardPage: React.FC = () => {
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-semibold text-gray-900">
+                    <h3 className="font-semibold text-gray-900 dark:text-white">
                       {dashboardData.progress.currentRoadmap.title}
                     </h3>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
                       {dashboardData.progress.completedSteps} of {dashboardData.progress.totalSteps} steps completed
                     </p>
                   </div>
@@ -201,7 +201,7 @@ const DashboardPage: React.FC = () => {
                   />
                 </div>
                 
-                <div className="flex items-center justify-between text-sm text-gray-600">
+                <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
                   <span>Estimated completion: {dashboardData.progress.currentRoadmap.estimatedDuration}</span>
                   <Link 
                     to="/learning"
@@ -214,10 +214,10 @@ const DashboardPage: React.FC = () => {
             ) : (
               <div className="text-center py-8">
                 <Target className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                   No active learning path
                 </h3>
-                <p className="text-gray-600 mb-4">
+                <p className="text-gray-600 dark:text-gray-400 mb-4">
                   Start your career journey by choosing a learning path
                 </p>
                 <Link 
@@ -234,7 +234,7 @@ const DashboardPage: React.FC = () => {
         {/* Recommendations */}
         <div className="card">
           <div className="card-header">
-            <h2 className="text-lg font-semibold flex items-center gap-2">
+            <h2 className="text-lg font-semibold flex items-center gap-2 text-gray-900 dark:text-white">
               <Zap className="w-5 h-5 text-yellow-500" />
               Recommended for You
             </h2>
@@ -242,14 +242,14 @@ const DashboardPage: React.FC = () => {
           <div className="card-content">
             <div className="space-y-4">
               {dashboardData?.recommendations?.suggestedTracks?.map((track: any, index: number) => (
-                <div key={index} className="border border-gray-200 rounded-lg p-4 hover:border-primary-300 transition-colors">
+                <div key={index} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:border-primary-300 dark:hover:border-primary-600 transition-colors">
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-semibold text-gray-900">{track.title}</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-white">{track.title}</h3>
                     <span className="text-sm text-primary-600 font-medium">
                       {track.matchPercentage}% match
                     </span>
                   </div>
-                  <p className="text-sm text-gray-600 mb-3">{track.description}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">{track.description}</p>
                   <Link 
                     to={`/career-tracks/${track.id}`}
                     className="text-sm text-primary-600 hover:text-primary-700 font-medium"
@@ -267,7 +267,7 @@ const DashboardPage: React.FC = () => {
         {/* Recent Achievements */}
         <div className="card">
           <div className="card-header">
-            <h2 className="text-lg font-semibold flex items-center gap-2">
+            <h2 className="text-lg font-semibold flex items-center gap-2 text-gray-900 dark:text-white">
               <Trophy className="w-5 h-5 text-yellow-500" />
               Recent Achievements
             </h2>
@@ -276,13 +276,13 @@ const DashboardPage: React.FC = () => {
             {dashboardData?.achievements?.length > 0 ? (
               <div className="space-y-3">
                 {dashboardData.achievements.map((achievement: any, index: number) => (
-                  <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                  <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <div className="text-2xl">{achievement.icon}</div>
                     <div className="flex-1">
-                      <h3 className="font-semibold text-gray-900">{achievement.title}</h3>
-                      <p className="text-sm text-gray-600">{achievement.description}</p>
+                      <h3 className="font-semibold text-gray-900 dark:text-white">{achievement.title}</h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{achievement.description}</p>
                     </div>
-                    <div className="text-sm text-gray-500">
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
                       {new Date(achievement.earnedAt).toLocaleDateString()}
                     </div>
                   </div>
@@ -291,7 +291,7 @@ const DashboardPage: React.FC = () => {
             ) : (
               <div className="text-center py-8">
                 <Award className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600">
+                <p className="text-gray-600 dark:text-gray-400">
                   Complete your first course to earn achievements!
                 </p>
               </div>
@@ -302,7 +302,7 @@ const DashboardPage: React.FC = () => {
         {/* Recent Activity */}
         <div className="card">
           <div className="card-header">
-            <h2 className="text-lg font-semibold flex items-center gap-2">
+            <h2 className="text-lg font-semibold flex items-center gap-2 text-gray-900 dark:text-white">
               <Clock className="w-5 h-5 text-gray-500" />
               Recent Activity
             </h2>
@@ -314,9 +314,9 @@ const DashboardPage: React.FC = () => {
                   <div key={index} className="flex items-start gap-3">
                     <div className="text-lg">{activity.icon}</div>
                     <div className="flex-1">
-                      <h3 className="font-semibold text-gray-900">{activity.title}</h3>
-                      <p className="text-sm text-gray-600">{activity.description}</p>
-                      <p className="text-xs text-gray-500 mt-1">
+                      <h3 className="font-semibold text-gray-900 dark:text-white">{activity.title}</h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{activity.description}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                         {new Date(activity.timestamp).toLocaleDateString()}
                       </p>
                     </div>
@@ -326,7 +326,7 @@ const DashboardPage: React.FC = () => {
             ) : (
               <div className="text-center py-8">
                 <Calendar className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-600">
+                <p className="text-gray-600 dark:text-gray-400">
                   Your recent activity will appear here
                 </p>
               </div>

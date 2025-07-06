@@ -53,11 +53,11 @@ const LoginPage: React.FC = () => {
         </div>
 
         {/* Login Form */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8">
           <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
             {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Email address
               </label>
               <div className="relative">
@@ -86,7 +86,7 @@ const LoginPage: React.FC = () => {
 
             {/* Password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Password
               </label>
               <div className="relative">
@@ -133,7 +133,7 @@ const LoginPage: React.FC = () => {
                   type="checkbox"
                   className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
+                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                   Remember me
                 </label>
               </div>
@@ -162,12 +162,12 @@ const LoginPage: React.FC = () => {
             </button>
 
             {/* Demo Credentials */}
-            <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+            <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
               <div className="flex items-center gap-2 mb-2">
                 <Sparkles className="w-4 h-4 text-yellow-500" />
-                <span className="text-sm font-medium text-gray-700">Demo Credentials</span>
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Demo Credentials</span>
               </div>
-              <div className="text-xs text-gray-600 space-y-1">
+              <div className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
                 <div>
                   <strong>Admin:</strong> BessaAdmin@mentorny.com / Admin123*
                 </div>
@@ -179,7 +179,7 @@ const LoginPage: React.FC = () => {
 
             {/* Sign up link */}
             <div className="text-center">
-              <span className="text-sm text-gray-600">
+              <span className="text-sm text-gray-600 dark:text-gray-400">
                 Don't have an account?{' '}
                 <Link
                   to="/register"

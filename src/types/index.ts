@@ -31,7 +31,17 @@ export interface RegisterCredentials {
 
 export interface AuthResponse {
   access_token: string;
+  refresh_token: string;
   user: User;
+}
+
+export interface RefreshTokenRequest {
+  refreshToken: string;
+}
+
+export interface RefreshTokenResponse {
+  access_token: string;
+  refresh_token: string;
 }
 
 // Career and Skills Types

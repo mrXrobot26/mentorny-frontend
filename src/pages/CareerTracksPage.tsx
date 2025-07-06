@@ -126,7 +126,7 @@ const CareerTracksPage: React.FC = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -172,21 +172,21 @@ const CareerTracksPage: React.FC = () => {
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-white rounded-lg p-6 text-center border border-gray-200">
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center border border-gray-200 dark:border-gray-700">
           <div className="text-2xl font-bold text-primary-600">{careerTracks.length}</div>
-          <div className="text-sm text-gray-600">Career Tracks</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">Career Tracks</div>
         </div>
-        <div className="bg-white rounded-lg p-6 text-center border border-gray-200">
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center border border-gray-200 dark:border-gray-700">
           <div className="text-2xl font-bold text-green-600">95%</div>
-          <div className="text-sm text-gray-600">Job Success Rate</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">Job Success Rate</div>
         </div>
-        <div className="bg-white rounded-lg p-6 text-center border border-gray-200">
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center border border-gray-200 dark:border-gray-700">
           <div className="text-2xl font-bold text-orange-600">6-18</div>
-          <div className="text-sm text-gray-600">Months to Complete</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">Months to Complete</div>
         </div>
-        <div className="bg-white rounded-lg p-6 text-center border border-gray-200">
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center border border-gray-200 dark:border-gray-700">
           <div className="text-2xl font-bold text-purple-600">$85K</div>
-          <div className="text-sm text-gray-600">Average Starting Salary</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">Average Starting Salary</div>
         </div>
       </div>
 
@@ -205,7 +205,7 @@ const CareerTracksPage: React.FC = () => {
                     {track.icon}
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg text-gray-900 group-hover:text-primary-600 transition-colors">
+                    <h3 className="font-bold text-lg text-gray-900 dark:text-white group-hover:text-primary-600 transition-colors">
                       {track.title}
                     </h3>
                     <div className="flex items-center gap-2 mt-1">
@@ -219,13 +219,13 @@ const CareerTracksPage: React.FC = () => {
               </div>
 
               {/* Description */}
-              <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+              <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm leading-relaxed">
                 {track.description}
               </p>
 
               {/* Skills */}
               <div className="mb-4">
-                <h4 className="text-sm font-semibold text-gray-900 mb-2">Key Skills:</h4>
+                <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Key Skills:</h4>
                 <div className="flex flex-wrap gap-1">
                   {track.requiredSkills.slice(0, 3).map((skill: string, index: number) => (
                     <span key={index} className="skill-badge">
@@ -243,27 +243,27 @@ const CareerTracksPage: React.FC = () => {
               {/* Stats */}
               <div className="space-y-3 mb-6">
                 <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-2 text-gray-600">
+                  <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                     <DollarSign className="w-4 h-4" />
                     <span>Salary Range</span>
                   </div>
-                  <span className="font-semibold text-gray-900">
+                  <span className="font-semibold text-gray-900 dark:text-white">
                     ${track.avgSalary.min.toLocaleString()} - ${track.avgSalary.max.toLocaleString()}
                   </span>
                 </div>
                 
                 <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-2 text-gray-600">
+                  <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                     <Clock className="w-4 h-4" />
                     <span>Duration</span>
                   </div>
-                  <span className="font-semibold text-gray-900">
+                  <span className="font-semibold text-gray-900 dark:text-white">
                     {track.estimatedTime}
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-2 text-gray-600">
+                  <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
                     <TrendingUp className="w-4 h-4" />
                     <span>Difficulty</span>
                   </div>
@@ -306,10 +306,10 @@ const CareerTracksPage: React.FC = () => {
       {filteredTracks.length === 0 && (
         <div className="text-center py-12">
           <Target className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
             No career tracks found
           </h3>
-          <p className="text-gray-600 mb-4">
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
             Try adjusting your search criteria or filters
           </p>
           <button 
@@ -326,11 +326,11 @@ const CareerTracksPage: React.FC = () => {
       )}
 
       {/* Call to Action */}
-      <div className="bg-gradient-to-r from-primary-50 to-secondary-50 rounded-2xl p-8 text-center">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">
+      <div className="bg-gradient-to-r from-primary-50 to-secondary-50 dark:from-primary-900/20 dark:to-secondary-900/20 rounded-2xl p-8 text-center">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
           Not sure which track is right for you?
         </h2>
-        <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+        <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
           Take our AI-powered assessment to get personalized career recommendations 
           based on your skills, interests, and goals.
         </p>

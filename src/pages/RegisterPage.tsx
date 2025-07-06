@@ -79,16 +79,16 @@ const RegisterPage: React.FC = () => {
 
           {/* Right side - Registration Form */}
           <div className="flex flex-col justify-center">
-            <div className="bg-white rounded-2xl shadow-2xl p-8">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8">
               <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-gray-900">Create Account</h2>
-                <p className="text-gray-600 mt-2">Start your learning journey today</p>
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Create Account</h2>
+                <p className="text-gray-600 dark:text-gray-400 mt-2">Start your learning journey today</p>
               </div>
 
               <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                 {/* Name */}
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Full Name
                   </label>
                   <div className="relative">
@@ -117,7 +117,7 @@ const RegisterPage: React.FC = () => {
 
                 {/* Email */}
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Email Address
                   </label>
                   <div className="relative">
@@ -146,7 +146,7 @@ const RegisterPage: React.FC = () => {
 
                 {/* Age */}
                 <div>
-                  <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="age" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Age
                   </label>
                   <div className="relative">
@@ -179,7 +179,7 @@ const RegisterPage: React.FC = () => {
 
                 {/* Password */}
                 <div>
-                  <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Password
                   </label>
                   <div className="relative">
@@ -219,7 +219,7 @@ const RegisterPage: React.FC = () => {
 
                 {/* Confirm Password */}
                 <div>
-                  <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Confirm Password
                   </label>
                   <div className="relative">
@@ -253,7 +253,7 @@ const RegisterPage: React.FC = () => {
                     className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                     required
                   />
-                  <label htmlFor="terms" className="ml-2 block text-sm text-gray-700">
+                  <label htmlFor="terms" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                     I agree to the{' '}
                     <Link to="/terms" className="text-primary-600 hover:text-primary-500">
                       Terms of Service
@@ -283,7 +283,7 @@ const RegisterPage: React.FC = () => {
 
                 {/* Sign in link */}
                 <div className="text-center">
-                  <span className="text-sm text-gray-600">
+                  <span className="text-sm text-gray-600 dark:text-gray-400">
                     Already have an account?{' '}
                     <Link
                       to="/login"

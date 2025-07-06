@@ -8,12 +8,14 @@ interface ProtectedRouteProps {
   children: React.ReactNode;
   requiredRole?: Role;
   requireAuth?: boolean;
+  customValidation?: () => boolean;
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   children,
   requiredRole,
   requireAuth = true,
+  customValidation,
 }) => {
   const { user, isAuthenticated, isLoading } = useAuth();
   const location = useLocation();
@@ -30,6 +32,11 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   // If authentication is required but user is not authenticated
   if (requireAuth && !isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  // If custom validation is provided, use it
+  if (customValidation && !customValidation()) {
+    return <Navigate to="/unauthorized" replace />;
   }
 
   // If a specific role is required but user doesn't have it
